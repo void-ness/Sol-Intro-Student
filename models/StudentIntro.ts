@@ -10,10 +10,31 @@ export class StudentIntro {
         borsh.str('message'),
     ])
 
+    static borshAccountSchema = borsh.struct([
+        borsh.u8('initialized'),
+        borsh.str('name'),
+        borsh.str('message'),
+    ])
+
     serialize(): Buffer {
         const buffer = Buffer.alloc(1000);
         this.borshInstructionSchema.encode({ ...this, variant: 0 }, buffer);
         return buffer.slice(0, this.borshInstructionSchema.getSpan(buffer))
+    }
+
+    static deserialize(buffer?: Buffer): StudentIntro | null {
+        if (!buffer) {
+            return null
+        }
+
+        try {
+            const { name, message } = this.borshAccountSchema.decode(buffer)
+            return new StudentIntro(name, message)
+        } catch (e) {
+            console.log("error while deserialzing", e)
+            console.log(buffer)
+            return null
+        }
     }
 
     constructor(name: string, message: string) {
