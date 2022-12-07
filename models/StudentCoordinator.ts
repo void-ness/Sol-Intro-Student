@@ -2,7 +2,9 @@ import * as web3 from '@solana/web3.js'
 import { StudentIntro } from './StudentIntro'
 import bs58 from 'bs58'
 
-const STUDENT_INTRO_PROGRAM_ID = 'HdE95RSVsdb315jfJtaykXhXY478h53X6okDupVfY9yf'
+// const STUDENT_INTRO_PROGRAM_ID = 'HdE95RSVsdb315jfJtaykXhXY478h53X6okDupVfY9yf'
+// const STUDENT_INTRO_PROGRAM_ID = 'GU4HaUq9smiAFWVBoFwD7ke622dRNfockVDLYpaTXkbV'
+const STUDENT_INTRO_PROGRAM_ID = '92HR2ghpZJFKt6XdQfGW5ZMyLuEXjZo1YBrq49x1w1nV'
 
 export class StudCoordinator {
     static accounts: web3.PublicKey[] = []
@@ -50,6 +52,10 @@ export class StudCoordinator {
         }
 
         const accounts = await connection.getMultipleAccountsInfo(paginatedPublicKeys)
+
+        // this.accounts.forEach((pubkey) => {
+        //     console.log(new web3.PublicKey(pubkey).toString());
+        // })
 
         const students = (accounts).reduce((accum: StudentIntro[], account) => {
             const student = StudentIntro.deserialize(account?.data)

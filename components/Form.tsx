@@ -5,7 +5,8 @@ import { Box, Button, FormControl, FormLabel, Input, Textarea } from '@chakra-ui
 import * as web3 from '@solana/web3.js'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 
-const STUDENT_INTRO_PROGRAM_ID = 'HdE95RSVsdb315jfJtaykXhXY478h53X6okDupVfY9yf'
+// const STUDENT_INTRO_PROGRAM_ID = 'HdE95RSVsdb315jfJtaykXhXY478h53X6okDupVfY9yf'
+const STUDENT_INTRO_PROGRAM_ID = '92HR2ghpZJFKt6XdQfGW5ZMyLuEXjZo1YBrq49x1w1nV'
 
 export const Form: FC = () => {
     const [name, setName] = useState('')
