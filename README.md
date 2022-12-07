@@ -8,3 +8,5 @@ The program is used to send data to the program running on the solana blockchain
 <br>
 
 ![Project Snap](./media/stud-ss-1.png)
+<img src="./media/stud-ss-2.png" height=400>
+<img src="./media/stud-ss-3.png" height=400>
