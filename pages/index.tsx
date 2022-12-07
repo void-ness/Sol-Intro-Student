@@ -13,9 +13,11 @@ const Home: NextPage = () => {
         <title>Movie Reviews</title>
       </Head>
       <AppBar />
-      <Flex>
+      <Flex
+        direction={{ base: "column" }}
+      >
         {/* <Center> */}
-        <Box width={"40vw"} mx={10}>
+        <Box width={{ base: '80%', md: "40vw" }} mx={{ base: "auto", md: 10 }}>
           <Heading as="h1" size="lg" color="white" ml={0} mt={8} mb={0}>
             Introduce Yourself
           </Heading>

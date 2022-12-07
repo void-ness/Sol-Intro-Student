@@ -77,7 +77,7 @@ export const Form: FC = () => {
             // borderWidth={1}
             margin={0}
             mt={4}
-            width="90%"
+            width={{ base: '100%', md: "90%" }}
             justifyContent="left"
             // bgGradient={'linear(to-tr,#9249fb,#5597d9,#21efa5)'}
             bgGradient={'linear(to-tr,purple.400 20%, blue.400, green.300)'}

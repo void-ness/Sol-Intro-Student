@@ -14,11 +14,23 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size: 50px;
+  /* font-size: 50px; */
   color: white;
   padding-left: 20px;
   padding-right: 20px;
   flex-wrap: wrap;
+}
+
+@media screen and (max-width: 500px) {
+  .AppLogo {
+    width: 120px;
+  }
+
+  .AppHeader {
+    height: fit-content;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
 }
 
 .AppBody {
