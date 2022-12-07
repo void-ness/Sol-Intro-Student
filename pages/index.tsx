@@ -14,7 +14,7 @@ const Home: NextPage = () => {
       </Head>
       <AppBar />
       <Flex
-        direction={{ base: "column" }}
+        direction={{ base: "column", md: "row" }}
       >
         {/* <Center> */}
         <Box width={{ base: '80%', md: "40vw" }} mx={{ base: "auto", md: 10 }}>
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
           <Text color="whiteAlpha.700" ml={0} fontStyle="italic">Let others know more about you</Text>
           <Form />
         </Box>
-        <Box width={{ base: '80%', md: "70vw" }} margin={{ base: 'auto' }} mt={{ base: '5' }}>
+        <Box width={{ base: '80%', md: "70vw" }} margin={{ base: 'auto', md: "0" }} mt={{ base: '5' }}>
           <Heading as="h1" size="lg" color="white" ml={0} mt={8} mb={0}>
             Meet other students
           </Heading>
