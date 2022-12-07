@@ -7,4 +7,4 @@ The program is used to send data to the program running on the solana blockchain
  
 <br>
 
-![Project Snap](./assets/student-intro-ss.png)
+![Project Snap](./media/stud-ss-1.png)
