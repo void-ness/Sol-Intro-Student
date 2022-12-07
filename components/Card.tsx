@@ -9,19 +9,18 @@ export interface CardProps {
 export const Card: FC<CardProps> = (props) => {
     return (
         <Box
-            p={4}
+            p={3}
             display={{ md: "flex" }}
+            w={{ sm: 'full', md: '50%' }}
             maxWidth="32rem"
             borderWidth={3}
             marginBottom={6}
         >
             <Stack
-                w='full'
                 align={{ base: "center", md: "stretch" }}
                 textAlign={{ base: "center", md: "left" }}
                 mt={{ base: 4, md: 0 }}
-                ml={{ md: 4 }}
-                mr={{ md: 4 }}
+                spacing={"0"}
             >
                 <Text
                     fontWeight="bold"
@@ -33,10 +32,13 @@ export const Card: FC<CardProps> = (props) => {
                     {props.intro.name}
                 </Text>
 
-                <Text color="gray.400">
+                <Text
+                    mt={2}
+                    color="gray.400"
+                >
                     {props.intro.message}
                 </Text>
             </Stack>
-        </Box>
+        </Box >
     )
 }

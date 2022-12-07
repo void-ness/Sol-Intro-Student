@@ -22,7 +22,7 @@ export const Form: FC = () => {
     }
 
     const handleTransactionSubmit = async (studentIntro: StudentIntro) => {
-        console.log(studentIntro.name, studentIntro.message)
+        // console.log(studentIntro.name, studentIntro.message)
         if (!publicKey) {
             alert('Please connect your wallet!')
             return
@@ -74,28 +74,34 @@ export const Form: FC = () => {
             p={4}
             display={{ md: "flex" }}
             maxWidth="32rem"
-            borderWidth={1}
-            margin={2}
-            justifyContent="center"
+            // borderWidth={1}
+            margin={0}
+            mt={4}
+            width="90%"
+            justifyContent="left"
+            // bgGradient={'linear(to-tr,#9249fb,#5597d9,#21efa5)'}
+            bgGradient={'linear(to-tr,purple.400 20%, blue.400, green.300)'}
+            borderRadius="2xl"
+            boxShadow={'dark-lg'}
         >
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{ width: "90%" }}>
                 <FormControl isRequired>
                     <FormLabel color='gray.200'>
                         What do we call you?
                     </FormLabel>
                     <Input
                         id='name'
-                        color='gray.400'
+                        color='gray.200'
                         onChange={event => setName(event.currentTarget.value)}
                     />
                 </FormControl>
-                <FormControl isRequired>
+                <FormControl isRequired mt={4}>
                     <FormLabel color='gray.200'>
-                        What brings you to Solana, friend?
+                        Describe yourself in under 1 line
                     </FormLabel>
                     <Textarea
                         id='message'
-                        color='gray.400'
+                        color='gray.200'
                         onChange={event => setMessage(event.currentTarget.value)}
                     />
                 </FormControl>

@@ -1,4 +1,4 @@
-import { Center, Box, Heading } from '@chakra-ui/react'
+import { Center, Box, Heading, Text, Flex } from '@chakra-ui/react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { AppBar } from '../components/AppBar'
@@ -13,18 +13,24 @@ const Home: NextPage = () => {
         <title>Movie Reviews</title>
       </Head>
       <AppBar />
-      <Center>
-        <Box>
-          <Heading as="h1" size="lg" color="white" ml={4} mt={8} mb={4}>
-            Add your introduction
+      <Flex>
+        {/* <Center> */}
+        <Box width={"40vw"} mx={10}>
+          <Heading as="h1" size="lg" color="white" ml={0} mt={8} mb={0}>
+            Introduce Yourself
           </Heading>
+          <Text color="whiteAlpha.700" ml={0} fontStyle="italic">Let others know more about you</Text>
           <Form />
-          <Heading as="h1" size="lg" color="white" ml={4} mt={8} mb={4}>
+        </Box>
+        <Box width={"70vw"}>
+          <Heading as="h1" size="lg" color="white" ml={0} mt={8} mb={0}>
             Meet other students
           </Heading>
+          <Text color="whiteAlpha.700" ml={0} fontStyle="italic">Get to know about your peers</Text>
           <StudentList />
         </Box>
-      </Center>
+        {/* </Center> */}
+      </Flex>
     </div>
   )
 }

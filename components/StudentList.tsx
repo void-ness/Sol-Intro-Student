@@ -23,15 +23,16 @@ export const StudentList: FC = () => {
 
     return (
         <div>
-            <Center>
-                <Input
-                    width={'95%'}
-                    color={'gray.400'}
-                    onChange={event => setSearch(event.currentTarget.value)}
-                    placeholder={'search'}
-                    my={5}
-                />
-            </Center>
+            {/* <Center> */}
+            <Input
+                width={'50%'}
+                color={'gray.400'}
+                onChange={event => setSearch(event.currentTarget.value)}
+                placeholder={'search'}
+                mb={5}
+                mt={4}
+            />
+            {/* </Center> */}
 
             {
                 studIntros.map((studIntro, i) => {
