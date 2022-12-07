@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   return (
     <div className={styles.App}>
       <Head>
-        <title>Movie Reviews</title>
+        <title>Soul Connects</title>
       </Head>
       <AppBar />
       <Flex
