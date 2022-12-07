@@ -19,7 +19,7 @@ export const Card: FC<CardProps> = (props) => {
             <Stack
                 align={{ base: "center", md: "stretch" }}
                 textAlign={{ base: "center", md: "left" }}
-                mt={{ base: 4, md: 0 }}
+                mt={{ base: 0, md: 0 }}
                 spacing={"0"}
             >
                 <Text

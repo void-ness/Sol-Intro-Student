@@ -25,7 +25,7 @@ export const StudentList: FC = () => {
         <div>
             {/* <Center> */}
             <Input
-                width={'50%'}
+                width={{ base: '100%', md: '50%' }}
                 color={'gray.400'}
                 onChange={event => setSearch(event.currentTarget.value)}
                 placeholder={'search'}

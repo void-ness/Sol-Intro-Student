@@ -24,7 +24,7 @@ const Home: NextPage = () => {
           <Text color="whiteAlpha.700" ml={0} fontStyle="italic">Let others know more about you</Text>
           <Form />
         </Box>
-        <Box width={"70vw"}>
+        <Box width={{ base: '80%', md: "70vw" }} margin={{ base: 'auto' }} mt={{ base: '5' }}>
           <Heading as="h1" size="lg" color="white" ml={0} mt={8} mb={0}>
             Meet other students
           </Heading>
