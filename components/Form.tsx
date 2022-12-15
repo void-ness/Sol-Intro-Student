@@ -4,9 +4,7 @@ import { useState } from 'react'
 import { Box, Button, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react'
 import * as web3 from '@solana/web3.js'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
-
-// const STUDENT_INTRO_PROGRAM_ID = 'HdE95RSVsdb315jfJtaykXhXY478h53X6okDupVfY9yf'
-const STUDENT_INTRO_PROGRAM_ID = '92HR2ghpZJFKt6XdQfGW5ZMyLuEXjZo1YBrq49x1w1nV'
+import { STUDENT_INTRO_PROGRAM_ID } from '../utils/constants'
 
 export const Form: FC = () => {
     const [name, setName] = useState('')
@@ -22,7 +20,6 @@ export const Form: FC = () => {
     }
 
     const handleTransactionSubmit = async (studentIntro: StudentIntro) => {
-        // console.log(studentIntro.name, studentIntro.message)
         if (!publicKey) {
             alert('Please connect your wallet!')
             return
@@ -62,9 +59,11 @@ export const Form: FC = () => {
 
         try {
             let txid = await sendTransaction(transaction, connection)
+            alert(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
             console.log(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
 
         } catch (e) {
+            alert(JSON.stringify(e))
             console.log(JSON.stringify(e))
         }
     }
@@ -92,7 +91,7 @@ export const Form: FC = () => {
                     <Input
                         id='name'
                         color='gray.200'
-                        onChange={event => setName(event.currentTarget.value)}
+                        onChange={event => setName(event.currentTarget.value.toLowerCase())}
                     />
                 </FormControl>
                 <FormControl isRequired mt={4}>
