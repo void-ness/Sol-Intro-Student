@@ -24,7 +24,7 @@ export const Card: FC<CardProps> = (props) => {
             >
                 <Text
                     fontWeight="bold"
-                    textTransform="uppercase"
+                    textTransform="capitalize"
                     fontSize={{ base: "lg", md: "xl" }}
                     letterSpacing="wide"
                     color="gray.200"
