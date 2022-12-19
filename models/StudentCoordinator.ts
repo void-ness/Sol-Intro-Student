@@ -7,15 +7,24 @@ export class StudCoordinator {
     static accounts: web3.PublicKey[] = []
 
     static async prefetchAccounts(connection: web3.Connection, search: string) {
+        const offset = (4 + "introduction".length) + 1 + 32 + 4;
         const accounts = await connection.getProgramAccounts(
             new web3.PublicKey(STUDENT_INTRO_PROGRAM_ID),
             {
-                dataSlice: { offset: 1, length: 12 },
-                filters: search === '' ? [] : [
+                dataSlice: { offset: 0, length: offset + 20 },
+                filters: search === '' ? [
                     {
                         memcmp:
                         {
-                            offset: 5,
+                            offset: 4,
+                            bytes: bs58.encode(Buffer.from("introduction"))
+                        }
+                    }
+                ] : [
+                    {
+                        memcmp:
+                        {
+                            offset: offset,
                             bytes: bs58.encode(Buffer.from(search))
                         }
                     }
@@ -24,10 +33,10 @@ export class StudCoordinator {
         )
 
         accounts.sort((a, b) => {
-            const lengthA = a.account.data.readUInt32LE(0)
-            const lengthB = b.account.data.readUInt32LE(0)
-            const dataA = a.account.data.slice(4, 4 + lengthA)
-            const dataB = b.account.data.slice(4, 4 + lengthB)
+            const lengthA = a.account.data.readUInt32LE(offset - 4)
+            const lengthB = b.account.data.readUInt32LE(offset - 4)
+            const dataA = a.account.data.slice(offset, offset + lengthA)
+            const dataB = b.account.data.slice(offset, offset + lengthB)
             return dataA.compare(dataB)
         })
 
@@ -36,6 +45,7 @@ export class StudCoordinator {
 
     static async fetchAccounts(connection: web3.Connection, pageNo: number, perPage: number, search: string, reload: boolean): Promise<StudentIntro[]> {
         if (this.accounts.length === 0 || reload) {
+            console.log("see")
             await this.prefetchAccounts(connection, search)
         }
 
