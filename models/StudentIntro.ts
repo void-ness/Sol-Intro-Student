@@ -11,14 +11,16 @@ export class StudentIntro {
     ])
 
     static borshAccountSchema = borsh.struct([
+        borsh.str('discriminator'),
         borsh.u8('initialized'),
+        borsh.publicKey('reviewer'),
         borsh.str('name'),
         borsh.str('message'),
     ])
 
-    serialize(): Buffer {
+    serialize(variant: number): Buffer {
         const buffer = Buffer.alloc(1000);
-        this.borshInstructionSchema.encode({ ...this, variant: 0 }, buffer);
+        this.borshInstructionSchema.encode({ ...this, variant: variant }, buffer);
         return buffer.slice(0, this.borshInstructionSchema.getSpan(buffer))
     }
 
