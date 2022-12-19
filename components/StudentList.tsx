@@ -19,9 +19,19 @@ export const StudentList: FC = () => {
             page,
             10,
             search,
-            reload
+            search !== ""
         ).then(setStudIntros)
     }, [page, search, reload])
+
+    const onRefresh = () => {
+        StudCoordinator.fetchAccounts(
+            connection,
+            page,
+            10,
+            search,
+            true
+        ).then(setStudIntros)
+    }
 
     return (
         <div>
@@ -37,7 +47,7 @@ export const StudentList: FC = () => {
                     mr={4}
                 />
 
-                <Button onClick={() => setReload(!reload)} size="sm" borderRadius="3xl" color="gray.700" background={"whiteAlpha.800"}>Refresh</Button>
+                <Button onClick={() => onRefresh()} size="sm" borderRadius="3xl" color="gray.700" background={"whiteAlpha.800"}>Refresh</Button>
             </HStack>
             {/* </Center> */}
 
