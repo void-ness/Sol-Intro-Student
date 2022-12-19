@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { StudentIntro } from '../models/StudentIntro'
 import { useState } from 'react'
-import { Box, Button, FormControl, FormLabel, Input, Textarea } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, HStack, Input, Switch, Text, Textarea } from '@chakra-ui/react'
 import * as web3 from '@solana/web3.js'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
 import { STUDENT_INTRO_PROGRAM_ID } from '../utils/constants'
@@ -9,6 +9,7 @@ import { STUDENT_INTRO_PROGRAM_ID } from '../utils/constants'
 export const Form: FC = () => {
     const [name, setName] = useState('')
     const [message, setMessage] = useState('')
+    const [updateToggle, setUpdateToggle] = useState(false)
 
     const { connection } = useConnection();
     const { publicKey, sendTransaction } = useWallet();
@@ -25,11 +26,16 @@ export const Form: FC = () => {
             return
         }
 
-        const buffer = studentIntro.serialize()
+        const buffer = studentIntro.serialize(updateToggle ? 1 : 0)
         const transaction = new web3.Transaction()
 
         const [pda] = await web3.PublicKey.findProgramAddress(
             [publicKey.toBuffer()],
+            new web3.PublicKey(STUDENT_INTRO_PROGRAM_ID)
+        )
+
+        const [pda_counter] = await web3.PublicKey.findProgramAddress(
+            [pda.toBuffer(), Buffer.from("comment")],
             new web3.PublicKey(STUDENT_INTRO_PROGRAM_ID)
         )
 
@@ -42,6 +48,11 @@ export const Form: FC = () => {
                 },
                 {
                     pubkey: pda,
+                    isSigner: false,
+                    isWritable: true
+                },
+                {
+                    pubkey: pda_counter,
                     isSigner: false,
                     isWritable: true
                 },
@@ -104,7 +115,17 @@ export const Form: FC = () => {
                         onChange={event => setMessage(event.currentTarget.value)}
                     />
                 </FormControl>
-                <Button width="full" mt={4} type="submit">
+                <FormControl mt={4}>
+                    <HStack>
+                        <FormLabel color={"gray.200"} m={0}>
+                            Update
+                        </FormLabel>
+                        <Switch onChange={(event) => {
+                            setUpdateToggle(!updateToggle)
+                        }} colorScheme='purple' size={'sm'} />
+                    </HStack>
+                </FormControl>
+                <Button width="full" mt={6} type="submit">
                     Submit
                 </Button>
             </form>
