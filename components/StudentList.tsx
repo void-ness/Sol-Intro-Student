@@ -1,7 +1,7 @@
 import { Card } from './Card'
 import { FC, useEffect, useState } from 'react'
 import { StudentIntro } from '../models/StudentIntro'
-import { StudCoordinator } from '../models/StudentCoordinator';
+import { StudCoordinator } from '../coordinators/StudentCoordinator';
 import * as web3 from '@solana/web3.js';
 import { Button, Center, HStack, Input, Spacer } from '@chakra-ui/react';
 import { useConnection } from '@solana/wallet-adapter-react';
