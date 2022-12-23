@@ -21,7 +21,7 @@ export const StudentList: FC = () => {
             search,
             search !== ""
         ).then(setStudIntros)
-    }, [page, search, reload])
+    }, [page, search, reload, connection])
 
     const onRefresh = () => {
         StudCoordinator.fetchAccounts(

@@ -16,7 +16,13 @@ export const Form: FC = () => {
 
     const handleSubmit = (event: any) => {
         event.preventDefault()
-        const studentIntro = new StudentIntro(name, message)
+
+        if (!publicKey) {
+            alert('Please connect your wallet!')
+            return
+        }
+
+        const studentIntro = new StudentIntro(name, message, publicKey)
         handleTransactionSubmit(studentIntro)
     }
 
