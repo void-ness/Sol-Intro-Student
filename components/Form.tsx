@@ -65,7 +65,7 @@ export const Form: FC = () => {
                 {
                     pubkey: web3.SystemProgram.programId,
                     isSigner: false,
-                    isWritable: true
+                    isWritable: false
                 }
             ],
             data: buffer,
@@ -76,8 +76,8 @@ export const Form: FC = () => {
 
         try {
             let txid = await sendTransaction(transaction, connection)
-            alert(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
-            console.log(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`)
+            alert(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=custom`)
+            console.log(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=custom`)
 
         } catch (e) {
             alert(JSON.stringify(e))
