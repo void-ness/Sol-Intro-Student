@@ -3,15 +3,18 @@ import { FC, useEffect, useState } from 'react'
 import { StudentIntro } from '../models/StudentIntro'
 import { StudCoordinator } from '../coordinators/StudentCoordinator';
 import * as web3 from '@solana/web3.js';
-import { Button, Center, HStack, Input, Spacer } from '@chakra-ui/react';
+import { Button, Center, HStack, Input, Spacer, useDisclosure } from '@chakra-ui/react';
 import { useConnection } from '@solana/wallet-adapter-react';
+import { ReviewDetail } from './ReviewDetail';
 
 export const StudentList: FC = () => {
     const [studIntros, setStudIntros] = useState<StudentIntro[]>([])
     const { connection } = useConnection();
     const [page, setPage] = useState(1)
     const [search, setSearch] = useState("")
-    const [reload, setReload] = useState(false)
+    const [selectedIntro, setSelectedIntro] = useState<StudentIntro>(StudentIntro.mocks[0])
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     useEffect(() => {
         StudCoordinator.fetchAccounts(
@@ -21,9 +24,10 @@ export const StudentList: FC = () => {
             search,
             search !== ""
         ).then(setStudIntros)
-    }, [page, search, reload, connection])
+    }, [page, search, connection])
 
     const onRefresh = () => {
+        onOpen()
         StudCoordinator.fetchAccounts(
             connection,
             page,
@@ -31,6 +35,11 @@ export const StudentList: FC = () => {
             search,
             true
         ).then(setStudIntros)
+    }
+
+    const handleIntroSelected = (intro: StudentIntro) => {
+        setSelectedIntro(intro)
+        onOpen()
     }
 
     return (
@@ -51,12 +60,20 @@ export const StudentList: FC = () => {
             </HStack>
             {/* </Center> */}
 
+            <ReviewDetail
+                isOpen={isOpen}
+                onClose={onClose}
+                intro={selectedIntro ?? studIntros[0]}
+            />
+
             {
-                studIntros.map((studIntro, i) => {
-                    return (
-                        <Card key={i} intro={studIntro} />
-                    )
-                })
+                studIntros.map((studIntro, i) => (
+                    <Card
+                        key={i}
+                        intro={studIntro}
+                        onClick={() => { handleIntroSelected(studIntro) }}
+                    />
+                ))
             }
 
             <Center>

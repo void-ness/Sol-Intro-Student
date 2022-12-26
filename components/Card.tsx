@@ -4,6 +4,7 @@ import { StudentIntro } from '../models/StudentIntro';
 
 export interface CardProps {
     intro: StudentIntro;
+    onClick: () => void
 }
 
 export const Card: FC<CardProps> = (props) => {
@@ -15,6 +16,7 @@ export const Card: FC<CardProps> = (props) => {
             maxWidth="32rem"
             borderWidth={3}
             marginBottom={6}
+            onClick={props.onClick}
         >
             <Stack
                 align={{ base: "center", md: "stretch" }}
