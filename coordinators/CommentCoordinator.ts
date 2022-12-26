@@ -57,7 +57,7 @@ export class CommentCoordinator {
             const [pda] = await web3.PublicKey.findProgramAddress(
                 [
                     introduction.toBuffer(),
-                    new BN([i]).toArrayLike(Buffer, "be", 8),
+                    new BN([i - 1]).toArrayLike(Buffer, "be", 8),
                 ],
                 new web3.PublicKey(STUDENT_INTRO_PROGRAM_ID)
             )
