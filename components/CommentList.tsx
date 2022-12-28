@@ -2,7 +2,7 @@ import { StudentIntro } from "../models/StudentIntro";
 import { FC, useEffect, useState } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Comment } from "../models/comment";
-import { Box, Button, Center, Heading, HStack, Spacer, Stack } from "@chakra-ui/react";
+import { Box, Button, Center, Heading, HStack, Spacer, Stack, Text } from "@chakra-ui/react";
 import { CommentCoordinator } from "../coordinators/CommentCoordinator";
 
 interface CommentListProps {
@@ -34,35 +34,48 @@ export const CommentList: FC<CommentListProps> = ({
     }, [page])
 
     return (
-        <div>
-            <Heading as="h1" size="l">
+        <div style={{ "marginBottom": "10px" }}>
+            <Heading size="md" mt={4} mb={2}>
                 Existing Comments
             </Heading>
 
             {
                 comments.map((comment, i) => (
-                    <Box key={i}>
+                    <Box
+                        key={i}
+                        bgColor={"purple.200"}
+                        width={"fit-content"}
+                        py={1}
+                        px={4}
+                        borderRadius={"md"}
+                        borderTopLeftRadius={"0"}
+                        mb={3}
+                        fontSize={"md"}
+                        fontWeight={"medium"}
+                    >
                         <div>{comment.comment}</div>
                     </Box>
                 ))
             }
 
             <Stack>
-                <Center>
-                    <HStack w="full" mt={2} mb={8} ml={4} mr={4}>
-                        {page > 1 && (
-                            <Button onClick={() => setPage(page - 1)}>
-                                Previous
-                            </Button>
-                        )}
-                        <Spacer />
-                        {CommentCoordinator.commentCount > page * 3 && (
-                            <Button onClick={() => setPage(page + 1)}>
-                                Next
-                            </Button>
-                        )}
-                    </HStack>
-                </Center>
+                <HStack w="full" mt={6}>
+                    {page > 1 && (
+                        <Button onClick={() => setPage(page - 1)} colorScheme={"purple"}>
+                            Previous
+                        </Button>
+                    )}
+
+                    <Spacer />
+
+                    {CommentCoordinator.commentCount > page * 3 && (
+                        <Button onClick={() => setPage(page + 1)} colorScheme={"purple"}>
+                            Next
+                        </Button>
+                    )}
+                </HStack>
+
+                <Text align={"center"}>{page}</Text>
             </Stack>
         </div>
     )
