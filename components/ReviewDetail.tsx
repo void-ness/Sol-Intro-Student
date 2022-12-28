@@ -1,4 +1,4 @@
-import { Button, FormControl, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack } from "@chakra-ui/react"
+import { Button, FormControl, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Stack, Text } from "@chakra-ui/react"
 import { useConnection, useWallet } from "@solana/wallet-adapter-react"
 import { FC, useState } from "react"
 import { CommentCoordinator } from "../coordinators/CommentCoordinator"
@@ -113,21 +113,38 @@ export const ReviewDetail: FC<ReviewDetailProps> = ({
 
     return (
         <div>
-            <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
+            <Modal
+                isOpen={isOpen}
+                onClose={onClose}
+                size={"lg"}
+                isCentered
+            >
+                <ModalOverlay
+                    bgColor={"blackAlpha.600"}
+                />
+                <ModalContent
+                    bg={"whitesmoke"}
+                >
                     <ModalHeader
                         textTransform={"uppercase"}
+                        pb={0}
                     >
                         {"I'm " + intro.name}
                     </ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
+
+                    <ModalCloseButton
+                        color={"red"}
+                        size={"md"}
+                        mt={1}
+                    />
+
+                    <ModalBody pt={0}>
                         <Stack>
-                            <p>{intro.message}</p>
+                            <Text size={"sm"} >{intro.message}</Text>
                             <form onSubmit={handleSubmit}>
-                                <FormControl isRequired>
+                                <FormControl isRequired mt={5}>
                                     <Input
+                                        width={"sm"}
                                         id="title"
                                         color={"black"}
                                         onChange={(event) => setComment(event.currentTarget.value)}
@@ -135,7 +152,7 @@ export const ReviewDetail: FC<ReviewDetailProps> = ({
                                     />
                                 </FormControl>
 
-                                <Button type="submit">
+                                <Button type="submit" mt={3} colorScheme={"purple"}>
                                     Add comment
                                 </Button>
                             </form>
@@ -144,6 +161,6 @@ export const ReviewDetail: FC<ReviewDetailProps> = ({
                     </ModalBody>
                 </ModalContent>
             </Modal>
-        </div>
+        </div >
     )
 }
