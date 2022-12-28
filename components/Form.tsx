@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Box, Button, FormControl, FormLabel, HStack, Input, Switch, Text, Textarea } from '@chakra-ui/react'
 import * as web3 from '@solana/web3.js'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
-import { STUDENT_INTRO_PROGRAM_ID } from '../utils/constants'
+import { RPC_URL, STUDENT_INTRO_PROGRAM_ID } from '../utils/constants'
 
 export const Form: FC = () => {
     const [name, setName] = useState('')
@@ -76,8 +76,8 @@ export const Form: FC = () => {
 
         try {
             let txid = await sendTransaction(transaction, connection)
-            alert(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=custom`)
-            console.log(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=custom`)
+            alert(`Transaction submitted successfully`)
+            console.log(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=${RPC_URL}`)
 
         } catch (e) {
             alert(JSON.stringify(e))

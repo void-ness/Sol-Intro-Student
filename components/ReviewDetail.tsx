@@ -7,7 +7,7 @@ import { StudentIntro } from "../models/StudentIntro"
 import { CommentList } from "./CommentList"
 
 import * as web3 from "@solana/web3.js"
-import { STUDENT_INTRO_PROGRAM_ID } from "../utils/constants"
+import { RPC_URL, STUDENT_INTRO_PROGRAM_ID } from "../utils/constants"
 
 
 interface ReviewDetailProps {
@@ -100,10 +100,10 @@ export const ReviewDetail: FC<ReviewDetailProps> = ({
         try {
             let txid = await sendTransaction(transaction, connection)
             alert(
-                `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=custom`
+                `Transaction submitted successfully`
             )
             console.log(
-                `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=custom`
+                `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=${RPC_URL}`
             )
         } catch (e) {
             console.log(JSON.stringify(e))
