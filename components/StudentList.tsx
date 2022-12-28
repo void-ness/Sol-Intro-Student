@@ -2,7 +2,6 @@ import { Card } from './Card'
 import { FC, useEffect, useState } from 'react'
 import { StudentIntro } from '../models/StudentIntro'
 import { StudCoordinator } from '../coordinators/StudentCoordinator';
-import * as web3 from '@solana/web3.js';
 import { Button, Center, HStack, Input, Spacer, useDisclosure } from '@chakra-ui/react';
 import { useConnection } from '@solana/wallet-adapter-react';
 import { ReviewDetail } from './ReviewDetail';
@@ -44,7 +43,6 @@ export const StudentList: FC = () => {
 
     return (
         <div>
-            {/* <Center> */}
             <HStack>
                 <Input
                     width={{ base: '100%', md: '50%' }}
@@ -58,7 +56,6 @@ export const StudentList: FC = () => {
 
                 <Button onClick={() => onRefresh()} size="sm" borderRadius="3xl" color="gray.700" background={"whiteAlpha.800"}>Refresh</Button>
             </HStack>
-            {/* </Center> */}
 
             <ReviewDetail
                 isOpen={isOpen}
