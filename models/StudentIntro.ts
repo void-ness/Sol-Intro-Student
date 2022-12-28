@@ -34,7 +34,7 @@ export class StudentIntro {
 
         try {
             const { name, message, reviewer } = this.borshAccountSchema.decode(buffer)
-            console.log(reviewer.toString())
+            // console.log(reviewer.toString())
             return new StudentIntro(name, message, reviewer)
         } catch (e) {
             console.log("error while deserialzing", e)
@@ -56,7 +56,7 @@ export class StudentIntro {
     }
 
     static mocks: StudentIntro[] = [
-        new StudentIntro('Rohan Sharma', `The freedom of the blockchain and the transfer of power back into the hands of the community members`, new PublicKey("EurMFhvwKScjv469XQoUm1Qj6PFJQoVwXYmdgeXCqg5m")),
+        new StudentIntro('Error 404', `Please wait, while the information about the user is loaded`, new PublicKey("EurMFhvwKScjv469XQoUm1Qj6PFJQoVwXYmdgeXCqg5m")),
         new StudentIntro('Tia shaw', `Speed. Accurac. Futuristic. Solana checks all the boxes for me.`, new PublicKey("EurMFhvwKScjv469XQoUm1Qj6PFJQoVwXYmdgeXCqg5m")),
     ]
 }

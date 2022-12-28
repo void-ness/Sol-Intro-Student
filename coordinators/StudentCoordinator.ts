@@ -45,7 +45,6 @@ export class StudCoordinator {
 
     static async fetchAccounts(connection: web3.Connection, pageNo: number, perPage: number, search: string, reload: boolean): Promise<StudentIntro[]> {
         if (this.accounts.length === 0 || reload) {
-            console.log("see")
             await this.prefetchAccounts(connection, search)
         }
 
@@ -59,10 +58,6 @@ export class StudCoordinator {
         }
 
         const accounts = await connection.getMultipleAccountsInfo(paginatedPublicKeys)
-
-        // this.accounts.forEach((pubkey) => {
-        //     console.log(new web3.PublicKey(pubkey).toString());
-        // })
 
         const students = (accounts).reduce((accum: StudentIntro[], account) => {
             const student = StudentIntro.deserialize(account?.data)

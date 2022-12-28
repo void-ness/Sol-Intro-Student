@@ -47,7 +47,7 @@ export class CommentCoordinator {
     ): Promise<Comment[]> {
         await this.syncCommentCount(connection, introduction)
 
-        console.log("count", this.commentCount);
+        // console.log("count", this.commentCount);
         const start = this.commentCount - (perPage * (pageNo - 1));
         const end = Math.max(start - perPage, 0);
 

@@ -61,7 +61,7 @@ export const ReviewDetail: FC<ReviewDetailProps> = ({
             comment.introduction
         )
 
-        const account = await connection.getAccountInfo(counter)
+        // const account = await connection.getAccountInfo(counter)
 
         const instruction = new web3.TransactionInstruction({
             keys: [

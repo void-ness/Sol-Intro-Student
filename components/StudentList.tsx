@@ -27,7 +27,7 @@ export const StudentList: FC = () => {
     }, [page, search, connection])
 
     const onRefresh = () => {
-        onOpen()
+        // onOpen()
         StudCoordinator.fetchAccounts(
             connection,
             page,
