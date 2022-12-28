@@ -41,8 +41,8 @@ export const CommentList: FC<CommentListProps> = ({
 
             {
                 comments.map((comment, i) => (
-                    <Box>
-                        <div key={i}>{comment.comment}</div>
+                    <Box key={i}>
+                        <div>{comment.comment}</div>
                     </Box>
                 ))
             }
