@@ -76,7 +76,7 @@ export const Form: FC = () => {
 
         try {
             let txid = await sendTransaction(transaction, connection)
-            alert(`Transaction submitted successfully`)
+            alert("Transaction submitted successfully")
             console.log(`Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=${RPC_URL}`)
 
         } catch (e) {
