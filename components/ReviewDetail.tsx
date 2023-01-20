@@ -7,6 +7,7 @@ import { StudentIntro } from "../models/StudentIntro"
 import { CommentList } from "./CommentList"
 
 import * as web3 from "@solana/web3.js"
+import * as token from "@solana/spl-token"
 import { RPC_URL, STUDENT_INTRO_PROGRAM_ID } from "../utils/constants"
 
 
@@ -53,13 +54,31 @@ export const ReviewDetail: FC<ReviewDetailProps> = ({
             return
         }
 
-        const buffer = comment.serialize()
         const transaction = new web3.Transaction()
+        const buffer = comment.serialize()
 
+        const programId = new web3.PublicKey(STUDENT_INTRO_PROGRAM_ID)
         const pda = await comment.publicKey();
         const counter = await CommentCoordinator.commentCounterPubkey(
             comment.introduction
         )
+
+        const [token_mint] = await web3.PublicKey.findProgramAddress([Buffer.from("token_mint")], programId);
+        const [mint_auth] = await web3.PublicKey.findProgramAddress([Buffer.from("token_auth")], programId);
+        const user_ata = await token.getAssociatedTokenAddress(token_mint, publicKey,);
+
+        const ataAccount = await connection.getAccountInfo(user_ata);
+
+        if (!ataAccount) {
+            const ataInstruction = token.createAssociatedTokenAccountInstruction(
+                publicKey,
+                user_ata,
+                publicKey,
+                token_mint
+            )
+
+            transaction.add(ataInstruction)
+        }
 
         // const account = await connection.getAccountInfo(counter)
 
@@ -86,13 +105,33 @@ export const ReviewDetail: FC<ReviewDetailProps> = ({
                     isWritable: true,
                 },
                 {
+                    pubkey: token_mint,
+                    isSigner: false,
+                    isWritable: true
+                },
+                {
+                    pubkey: mint_auth,
+                    isSigner: false,
+                    isWritable: false
+                },
+                {
+                    pubkey: user_ata,
+                    isSigner: false,
+                    isWritable: true
+                },
+                {
                     pubkey: web3.SystemProgram.programId,
                     isSigner: false,
-                    isWritable: false,
+                    isWritable: false
+                },
+                {
+                    pubkey: token.TOKEN_PROGRAM_ID,
+                    isSigner: false,
+                    isWritable: false
                 },
             ],
             data: buffer,
-            programId: new web3.PublicKey(STUDENT_INTRO_PROGRAM_ID),
+            programId: programId,
         })
 
         transaction.add(instruction)
