@@ -13,6 +13,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@project-serum/borsh": "^0.2.5",
+    "@solana/spl-token": "^0.3.7",
     "@solana/wallet-adapter-react": "^0.15.18",
     "@solana/wallet-adapter-react-ui": "^0.9.16",
     "@solana/wallet-adapter-wallets": "^0.18.9",
